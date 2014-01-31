@@ -10,7 +10,16 @@ reverse(/[cbr]at/) // /ta[cbr]/
 reverse(/^(pear|kiwi)$/) // /^(iwik|raep)$/
 ```
 
+## API
 
+### reverse(regex|str)
+
+Reverse a regular expression. Accepts regex or a string.
+
+## TODO
+
+- more tests
+- debug statements
 
 ## License
 

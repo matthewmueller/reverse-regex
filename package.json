@@ -1,0 +1,19 @@
+{
+  "name": "reverse-regex",
+  "version": "0.0.1",
+  "description": "reverse a regular expression",
+  "keywords": [],
+  "author": "Matthew Mueller <mattmuelle@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MatthewMueller/reverse-regex.git"
+  },
+  "dependencies": {
+    "debug": "~0.7.4"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "main": "index"
+}

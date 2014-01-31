@@ -1,7 +1,7 @@
 
 # reverse-regex
 
-  flip regular expression. allows you to efficiently search backwards.
+  flip a regular expression. allows you to efficiently search backwards.
 
 ## Example
 

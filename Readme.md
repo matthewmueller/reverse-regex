@@ -26,6 +26,11 @@ reverse(/^(pear|kiwi)$/) // /^(iwik|raep)$/
 
 Reverse a regular expression. Accepts regex or a string.
 
+## Test
+
+    npm install
+    make test
+
 ## License
 
 (The MIT License)

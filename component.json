@@ -1,0 +1,8 @@
+{
+  "name": "reverse-regex",
+  "version": "0.0.1",
+  "description": "reverse a regular expression",
+  "scripts": [
+    "index.js"
+  ]
+}

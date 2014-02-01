@@ -13,6 +13,10 @@
 
       $ component install matthewmueller/reverse-regex
 
+
+    * Development: `12kb`
+    * Minified + Gzip: `4kb`
+
 ## Example
 
 ```js

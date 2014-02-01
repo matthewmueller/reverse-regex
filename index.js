@@ -1,10 +1,4 @@
 /**
- * Module dependencies
- */
-
-var debug = require('debug')('reverse-regex');
-
-/**
  * Regexs
  */
 
@@ -50,6 +44,8 @@ function Parser(expr) {
     this.flags += (expr.ignoreCase) ? 'i' : '';
     this.flags += (expr.multiline) ? 'm' : '';
     this.original = expr = expr.source;
+  } else {
+    this.original = expr;
   }
 
   // trim leading and ending slashes
@@ -87,8 +83,6 @@ Parser.prototype.advance = function() {
     || this.escaped()
     || this.paren()
     || this.bracket()
-    || this.pipe()
-    || this.caret()
     || this.char()
     || this.error()
 
@@ -132,18 +126,7 @@ Parser.prototype.escaped = function() {
   var captures;
   if (captures = rspecials.exec(this.str)) {
     this.skip(captures);
-
-    var group = captures[0];
-
-    // optional modifier
-    var m = radditional.exec(this.str);
-    if (m) {
-      group += m[0];
-      this.skip(m[0].length);
-    }
-
-    this.out = group + this.out;
-
+    this.out = captures[0] + this.mod() + this.out;
     return 'slash';
   }
 };
@@ -160,40 +143,8 @@ Parser.prototype.bracket = function() {
     // find the end of the group
     var group = captures[0] + this.select(']');
 
-    // optional modifier
-    var m = radditional.exec(this.str);
-    if (m) {
-      group += m[0];
-      this.skip(m[0].length);
-    }
-
-    this.out = group + this.out;
+    this.out = group + this.mod() + this.out;
     return 'bracket';
-  }
-}
-
-/**
- * Pipe
- */
-
-Parser.prototype.pipe = function() {
-  var captures;
-  if (captures = /^\|/.exec(this.str)) {
-    this.skip(captures);
-    this.out = '|' + this.out;
-    return 'pipe';
-  }
-}
-
-/**
- * Caret
- */
-
-Parser.prototype.caret = function() {
-  var captures;
-  if (captures = /^\^/.exec(this.str)) {
-    this.skip(captures);
-    return 'caret';
   }
 }
 
@@ -206,7 +157,7 @@ Parser.prototype.paren = function() {
   if (captures = rparen.exec(this.str)) {
     this.skip(captures);
     var group = this.select(')').slice(0, -1);
-    this.out = captures[0] + reverse(group) + ')' + this.out;
+    this.out = captures[0] + reverse(group).source + ')' + this.out;
     return 'paren';
   }
 }
@@ -217,18 +168,9 @@ Parser.prototype.paren = function() {
 
 Parser.prototype.char = function() {
   var captures;
-  if (captures = /^\w/.exec(this.str)) {
+  if (captures = /^[\w\|\^]/.exec(this.str)) {
     this.skip(captures);
-    var group = captures[0];
-
-    // optional modifier
-    var m = radditional.exec(this.str);
-    if (m) {
-      group += m[0];
-      this.skip(m[0].length);
-    }
-
-    this.out = group + this.out;
+    this.out = captures[0] + this.mod() + this.out;
     return 'char';
   }
 }
@@ -246,6 +188,24 @@ Parser.prototype.select = function(str) {
   var slice = this.str.slice(0, i + str.length);
   this.skip(i + str.length);
   return slice;
+}
+
+/**
+ * Include the modifier (+, * {1,} (if present)
+ *
+ * @param {String} group
+ * @return {String}
+ */
+
+Parser.prototype.mod = function() {
+  var out = '';
+  var m = radditional.exec(this.str);
+  if (m) {
+    out += m[0];
+    this.skip(m[0].length);
+  }
+
+  return out;
 }
 
 /**

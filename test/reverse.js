@@ -9,15 +9,14 @@ var assert = require('assert');
  * Test
  */
 
-// describe('reverse(regex)', function() {
+describe('reverse(regex)', function() {
 
-// });
+  it('should reverse regexs', function() {
+    assert('a{1,}?[cd]*?ba' == reverse('ab[cd]*?a{1,}?').source)
+    assert('ba(raep|iwik)' == reverse('(kiwi|pear)ab').source)
+    assert('^(?:raep|iwik)ba$' == reverse('^ab(?:kiwi|pear)$').source)
+    assert('^\\s+|\\w+$' == reverse(/^\w+|\s+$/).source)
+    assert('^(\\x22|\\u2022)$' == reverse(/^(\u2022|\x22)$/).source)
+  })
 
-// console.log(reverse('ab[cd]*?a{1,}?'));
-// console.log(reverse('(kiwi|pear)ab'));
-// console.log(reverse('^ab(?:kiwi|pear)$'));
-// console.log(reverse(/^\w+|\s+$/));
-// console.log(reverse(/^(pear|kiwi)$/));
-console.log(reverse(/^[^bcr]at$/g));
-
-console.log(reverse(/\u2034\x12\w+/));
+});

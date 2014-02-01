@@ -26,7 +26,7 @@ reverse(/^(pear|kiwi)$/) // /^(iwik|raep)$/
 
 ## API
 
-### reverse(regex|str)
+### `reverse(regex|str)`
 
 Reverse a regular expression. Accepts regex or a string.
 

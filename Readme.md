@@ -3,6 +3,16 @@
 
   flip a regular expression. allows you to efficiently search backwards.
 
+## Installation
+
+    With node.js:
+
+      $ npm install reverse-regex
+
+    In the browser (with [component](http://github.com/component/component)):
+
+      $ component install matthewmueller/reverse-regex
+
 ## Example
 
 ```js
@@ -15,11 +25,6 @@ reverse(/^(pear|kiwi)$/) // /^(iwik|raep)$/
 ### reverse(regex|str)
 
 Reverse a regular expression. Accepts regex or a string.
-
-## TODO
-
-- more tests
-- debug statements
 
 ## License
 

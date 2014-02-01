@@ -5,17 +5,17 @@
 
 ## Installation
 
-    With node.js:
+  With node.js:
 
-      $ npm install reverse-regex
+    $ npm install reverse-regex
 
-    In the browser (with [component](http://github.com/component/component)):
+  In the browser (with [component](http://github.com/component/component)):
 
-      $ component install matthewmueller/reverse-regex
+    $ component install matthewmueller/reverse-regex
 
 
-    * Development: `12kb`
-    * Minified + Gzip: `4kb`
+  * Development: `12kb`
+  * Minified + Gzip: `4kb`
 
 ## Example
 
